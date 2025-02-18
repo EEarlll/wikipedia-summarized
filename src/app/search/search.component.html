@@ -1,0 +1,48 @@
+<div class="container">
+  <header>
+    <h1 routerLink="/" style="cursor: pointer">Cortex</h1>
+    <p-iconfield class="search-container">
+      <p-inputicon styleClass="pi pi-search" />
+      <input
+        type="text"
+        pInputText
+        placeholder="Search"
+        (keydown.enter)="search($event)"
+        #searchInput
+        pSize="large"
+      />
+    </p-iconfield>
+  </header>
+  <div class="category-list">
+    <ul>
+      <li>All</li>
+      <li>Llama</li>
+      <li>Mistral</li>
+      <li>All</li>
+      <li>Llama</li>
+      <li>Mistral</li>
+      <li>All</li>
+      <li>Llama</li>
+      <li>Mistral</li>
+      <li>All</li>
+      <li>Llama</li>
+      <li>Mistral</li>
+    </ul>
+  </div>
+  <p-divider />
+  <div class="main-content">
+    <ng-container *ngFor="let item of items?.query?.search">
+      <app-search-item [info]="item" *ngIf="item"></app-search-item>
+    </ng-container>
+  </div>
+  <div class="paginator-container"> 
+    <p-paginator
+      class="paginator"
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="totalRecords"
+      [showFirstLastIcon]="false"
+    ></p-paginator>
+  </div>
+</div>

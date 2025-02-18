@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="child">
+    <h1>Cortex</h1>
+    <p-iconfield class="search-container">
+      <p-inputicon styleClass="pi pi-search" />
+      <input
+        type="text"
+        pInputText
+        placeholder="Search"
+        (keydown.enter)="search($event)"
+        #searchInput
+      />
+    </p-iconfield>
+    <div class="button-container">
+      <p-button
+        label="Cortex Search"
+        class="btn"
+        (click)="search($event, searchInput.value)"
+      />
+      <p-button label="I'm Feeling Lucky" severity="secondary" class="btn" />
+    </div>
+  </div>
+</div>

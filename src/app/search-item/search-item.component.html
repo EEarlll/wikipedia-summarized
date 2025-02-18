@@ -1,0 +1,18 @@
+<div class="container">
+  <p-card class="card">
+    <div class="card-header">
+      <img
+        src="https://i.kinja-img.com/gawker-media/image/upload/gd8ljenaeahpn0wslmlz.jpg"
+        class="image--cover"
+      />
+      <div>
+        <p class="p-card-caption">Model Name</p>
+        <small class="p-card-subtitle">
+          {{ info.timestamp | date : "short" }}</small
+        >
+      </div>
+    </div>
+    <a class="p-card-title" [routerLink]="['/article', info.pageid]">{{ info.title }}</a>
+    <p class="response">{{ getFormattedSnippet() }}</p>
+  </p-card>
+</div>

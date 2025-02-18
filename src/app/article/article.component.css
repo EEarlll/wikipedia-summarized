@@ -1,0 +1,38 @@
+div {
+  width: 800px;
+  margin: auto;
+  text-align: justify;
+  padding: 32px;
+}
+
+i {
+  padding-bottom: 1rem;
+  cursor: pointer;
+  margin: 1rem 0;
+}
+
+/* Make paragraphs responsive and suitable for articles */
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5em;
+  white-space: pre-wrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  div {
+    width: 100%;
+    padding: 10px;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  p {
+    font-size: 0.8rem;
+  }
+}

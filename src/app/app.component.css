@@ -1,0 +1,17 @@
+div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+@media (max-width: 480px) {
+  footer {
+    display: none;
+  }
+}
