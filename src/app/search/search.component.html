@@ -16,17 +16,7 @@
   <div class="category-list">
     <ul>
       <li>All</li>
-      <li>Llama</li>
-      <li>Mistral</li>
-      <li>All</li>
-      <li>Llama</li>
-      <li>Mistral</li>
-      <li>All</li>
-      <li>Llama</li>
-      <li>Mistral</li>
-      <li>All</li>
-      <li>Llama</li>
-      <li>Mistral</li>
+      <li *ngFor="let model of models">{{ model }}</li>
     </ul>
   </div>
   <p-divider />
@@ -35,7 +25,7 @@
       <app-search-item [info]="item" *ngIf="item"></app-search-item>
     </ng-container>
   </div>
-  <div class="paginator-container"> 
+  <div class="paginator-container">
     <p-paginator
       class="paginator"
       (onPageChange)="onPageChange($event)"

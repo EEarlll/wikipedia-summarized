@@ -35,9 +35,10 @@ import { CommonModule } from '@angular/common';
 export class SearchComponent {
   queryParam: string = '';
   first: number = 0;
-  rows: number = 10;
-  totalRecords: number = 120;
+  rows: number = 8;
+  totalRecords: number = 24;
   items: Query | undefined;
+  models: Array<string> = ['LLama', 'Mistral', 'Gemini', 'Grok'];
 
   constructor(
     private route: ActivatedRoute,
@@ -53,10 +54,15 @@ export class SearchComponent {
   onPageChange(event: any) {
     this.first = event.first;
     this.rows = event.rows;
+    this.router.navigate(['/search'], {
+      queryParams: { q: this.queryParam, p: this.first },
+    });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
   async loadItem(param: string) {
-    this.items = await this.query.initialSearch(param);
+    this.items = await this.query.initialSearch(param, this.first);
+    this.totalRecords = this.items.query.searchinfo.totalhits;
   }
 
   async search(event?: any, eventValue?: string) {
