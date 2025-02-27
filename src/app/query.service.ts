@@ -32,9 +32,9 @@ export class QueryService {
     }
   }
 
-  async articleSearch(pageid: string): Promise<ArticleInterface> {  
-    const endPoint = `${this.baseUrl}?action=query&prop=extracts|pageimages|images&format=json&exlimit=1&explaintext=&piprop=original&origin=*`;
-    const userUrl = `${endPoint}&pageids=${pageid}`;
+  async articleSearch(title: string): Promise<ArticleInterface> {
+    const endPoint = `${this.baseUrl}?action=query&prop=extracts|pageimages|images|links&format=json&exlimit=1&explaintext=&piprop=original&pllimit=500&origin=*`;
+    const userUrl = `${endPoint}&titles=${title}`;
 
     try {
       const response = await fetch(userUrl, {
@@ -47,7 +47,8 @@ export class QueryService {
       }
 
       const data = await response.json();
-      const page = data.query.pages[pageid];
+      const pages = data.query.pages;
+      const page: any = Object.values(pages)[0];
 
       const article: ArticleInterface = {
         title: page.title,
@@ -59,11 +60,11 @@ export class QueryService {
               height: page.original.height,
             }
           : undefined,
-        images: page.images?.map((image: any) => ({ title: image.title })),
+        image: page.original?.source,
+        links: page.links?.map((link: any) => link.title),
       };
       console.log(article);
       return article;
-      
     } catch (error) {
       console.error(
         'There has been a problem with your fetch operation:',

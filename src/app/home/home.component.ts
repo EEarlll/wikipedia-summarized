@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
@@ -10,7 +10,6 @@ import { IconField } from 'primeng/iconfield';
 @Component({
   selector: 'app-home',
   imports: [
-    RouterOutlet,
     RouterModule,
     ButtonModule,
     InputTextModule,

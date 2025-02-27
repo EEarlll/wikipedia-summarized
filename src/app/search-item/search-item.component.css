@@ -60,7 +60,7 @@
   }
 
   .response {
-    height: 3.9em; /* Adjust height for smaller screens */
+    height: 3.9em;
     -webkit-line-clamp: 3;
   }
 }
@@ -81,7 +81,7 @@
   }
 
   .response {
-    height: 5.2em; /* Adjust height for smaller screens */
+    height: 5.2em;
     -webkit-line-clamp: 4;
   }
 }

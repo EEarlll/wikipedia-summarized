@@ -25,7 +25,6 @@ export interface ArticleInterface {
     width: number;
     height: number;
   };
-  images?: Array<{
-    title: string;
-  }>;
+  image: string;
+  links?: Array<string>;
 }

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="info?.title; else skeletonTemplate">
   <p-card class="card">
     <div class="card-header">
       <img
@@ -8,11 +8,33 @@
       <div>
         <p class="p-card-caption">Model Name</p>
         <small class="p-card-subtitle">
-          {{ info.timestamp | date : "short" }}</small
+          {{ info?.timestamp | date : "short" }}</small
         >
       </div>
     </div>
-    <a class="p-card-title" [routerLink]="['/article', info.pageid]">{{ info.title }}</a>
+    <a class="p-card-title" [routerLink]="['/article', info?.title]">{{
+      info?.title
+    }}</a>
     <p class="response">{{ getFormattedSnippet() }}</p>
   </p-card>
 </div>
+
+<ng-template #skeletonTemplate>
+  <div class="container">
+    <p-card class="card">
+      <div class="card-header">
+        <p-skeleton shape="circle" size="35px" />
+        <div>
+          <p-skeleton
+            width="100px"
+            height="15px"
+            [style]="{ 'margin-bottom': '3px' }"
+          />
+          <p-skeleton width="50px" height="15px" />
+        </div>
+      </div>
+      <p-skeleton widh="50px" height="15px" [style]="{ 'margin': '12px 0' }" />
+      <p-skeleton width="100%" height="3.6em" />
+    </p-card>
+  </div>
+</ng-template>

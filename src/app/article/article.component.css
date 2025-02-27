@@ -2,7 +2,7 @@ div {
   width: 800px;
   margin: auto;
   text-align: justify;
-  padding: 32px;
+  padding: 7px;
 }
 
 i {
@@ -17,6 +17,11 @@ p {
   line-height: 1.6;
   margin-bottom: 1.5em;
   white-space: pre-wrap;
+}
+
+.article-header__back{
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Responsive adjustments */
@@ -34,5 +39,8 @@ p {
 @media (max-width: 480px) {
   p {
     font-size: 0.8rem;
+  }
+  img{
+    width: 100%;
   }
 }

@@ -5,9 +5,9 @@ import { environment } from '../environments/environment.development';
   providedIn: 'root',
 })
 export class ArticleService {
-  geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash`;
+  geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite`;
   instruction =
-    'Your task is to create a concise, engaging summary of a parsed Wikipedia article. The summary must be structured into exactly four paragraphs, each covering a distinct key point of the original content. Given that most readers have a short attention span, keep each paragraph to no more than 2–3 sentences, ensuring that the entire summary is clear, direct, and focused on the most essential information.';
+    'Your task is to generate a structured summary of a parsed Wikipedia article without altering the original wording of key phrases and sentences. The summary must be exactly four paragraphs, with each paragraph covering a distinct key point of the article. Each paragraph should be limited to 3–5 sentences, ensuring readability while preserving the essential meaning and structure of the original text. Do not rephrase or modify critical terms, as the output will be compared against a list of links.';
 
   async gemini(prompt: string): Promise<string> {
     const endPoint = `${this.geminiUrl}:generateContent?key=${environment.geminiKey}`;
