@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="child">
-    <h1>Wikipedia </h1>
+  <form class="child">
+    <h1>Wikipedia</h1>
     <h1>Summarized</h1>
     <p-iconfield class="search-container">
       <p-inputicon styleClass="pi pi-search" />
@@ -10,6 +10,7 @@
         placeholder="Search"
         (keydown.enter)="search($event)"
         #searchInput
+        autocomplete="off"
       />
     </p-iconfield>
     <div class="button-container">
@@ -18,7 +19,12 @@
         class="btn"
         (click)="search($event, searchInput.value)"
       />
-      <p-button label="I'm Feeling Lucky" severity="secondary" class="btn" />
+      <p-button
+        label="I'm Feeling Lucky"
+        severity="secondary"
+        class="btn"
+        (click)="search($event, searchInput.value, true)"
+      />
     </div>
-  </div>
+  </form>
 </div>

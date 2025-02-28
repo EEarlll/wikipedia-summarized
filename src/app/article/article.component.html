@@ -4,7 +4,13 @@
       <div class="article-header__back">
         <i class="pi pi-arrow-left" (click)="navigateToLastPage()"></i>
       </div>
-      <h1>{{ info?.title }}</h1>
+      <h1>
+        <a
+          href="https://en.wikipedia.org/wiki/{{ info?.title }}"
+          target="_blank"
+          >{{ info?.title }}</a
+        >
+      </h1>
     </div>
 
     <div class="article-content">

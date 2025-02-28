@@ -1,36 +1,63 @@
 <div class="container">
   <header>
-    <h1 routerLink="/" style="cursor: pointer; font-size: 1em;text-align: center;">Wikipedia Summarized</h1>
+    <h1
+      routerLink="/"
+      style="cursor: pointer; font-size: 1em; text-align: center"
+    >
+      Wikipedia Summarized
+    </h1>
     <p-iconfield class="search-container">
-      <p-inputicon styleClass="pi pi-search" />
-      <input
-        type="text"
-        pInputText
-        placeholder="Search"
-        (keydown.enter)="search($event)"
-        #searchInput
-        pSize="large"
-      />
+      <form>
+        <p-inputicon styleClass="pi pi-search" />
+        <input
+          type="text"
+          [value]="queryParam"
+          pInputText
+          placeholder="Search"
+          (keydown.enter)="search($event)"
+          #searchInput
+          pSize="large"
+        />
+      </form>
     </p-iconfield>
   </header>
   <div class="category-list">
     <ul>
-      <li>All</li>
-      <li *ngFor="let model of models">{{ model }}</li>
+      <li>Total Similar Searches: {{ items?.query?.searchinfo?.totalhits }}</li>
+      <li *ngIf="items?.query?.searchinfo?.suggestion">
+        Suggestions:
+        <a href="/search?q={{ items?.query?.searchinfo?.suggestion }}">{{
+          items?.query?.searchinfo?.suggestion
+        }}</a>
+      </li>
     </ul>
   </div>
   <p-divider />
   <div class="main-content">
-    <ng-container *ngIf="items?.query?.search; else loading">
-      <ng-container *ngFor="let item of items?.query?.search">
-        <app-search-item [info]="item"></app-search-item>
+    <ng-container *ngIf="items?.query?.pages && totalRecords > 0; else loading">
+      <ng-container *ngFor="let page of pages">
+        <app-search-item [info]="page"></app-search-item>
       </ng-container>
     </ng-container>
     <ng-template #loading>
-      <ng-container *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]">
-        <app-search-item [info]="undefined"></app-search-item>
+      <ng-container *ngIf="totalRecords > 0">
+        <ng-container *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]">
+          <app-search-item [info]="undefined"></app-search-item>
+        </ng-container>
       </ng-container>
     </ng-template>
+    <ng-container *ngIf="totalRecords === 0">
+      <p>
+        Your search - <b>{{ queryParam }}</b> - did not match any documents.
+      </p>
+      <br />
+      <p>Suggestions:</p>
+      <ul style="display: flex; flex-direction: column">
+        <li>Make sure that all words are spelled correctly.</li>
+        <li>Try different keywords.</li>
+        <li>Try more general keywords.</li>
+      </ul>
+    </ng-container>
   </div>
   <div class="paginator-container">
     <p-paginator

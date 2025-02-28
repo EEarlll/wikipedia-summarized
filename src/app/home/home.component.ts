@@ -26,9 +26,18 @@ export class HomeComponent {
 
   constructor(private router: Router) {}
 
-  search(event?: any, eventValue?: string) {
+  async search(event?: any, eventValue?: string, lucky?: boolean) {
+    event?.preventDefault();
+    let randomWord;
+    if (lucky) {
+      randomWord = await fetch(
+        'https://random-word-api.herokuapp.com/word?number=1'
+      );
+      randomWord = (await randomWord.json())[0];
+    }
+    const parameter = event.target.value ? event.target.value : eventValue;
     this.router.navigate(['/search'], {
-      queryParams: { q: event.target.value ? event.target.value : eventValue },
+      queryParams: { q: lucky ? randomWord : parameter },
     });
   }
 }

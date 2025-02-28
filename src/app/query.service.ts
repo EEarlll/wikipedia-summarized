@@ -9,8 +9,15 @@ export class QueryService {
   baseUrl = 'https://en.wikipedia.org/w/api.php';
 
   async initialSearch(query: string, offset: number = 0): Promise<Query> {
-    const endPoint = `${this.baseUrl}?action=query&format=json&list=search&srlimit=8&sroffset=${offset}&srenablerewrites=True&origin=*`;
-    const userUrl = `${endPoint}&srsearch=${encodeURIComponent(query)}`;
+    const endPoint =
+      `${this.baseUrl}?action=query&format=json&generator=search` +
+      `&prop=pageimages|description|extracts|info` +
+      `&piprop=thumbnail&pithumbsize=500` +
+      `&gsrenablerewrites=True&gsroffset=${offset}` +
+      `&gsrlimit=8&exchars=500&exlimit=max` +
+      `&gsrinfo=totalhits|suggestion|rewrittenquery` +
+      `&explaintext=true&exintro=true&origin=*`;
+    const userUrl = `${endPoint}&gsrsearch=${encodeURIComponent(query)}`;
 
     try {
       const response = await fetch(userUrl, {

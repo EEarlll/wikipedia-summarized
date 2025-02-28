@@ -11,7 +11,7 @@ import { SearchItemComponent } from '../search-item/search-item.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { RouterModule } from '@angular/router';
 import { QueryService } from '../query.service';
-import { Query } from '../query';
+import { Page, Query } from '../query';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -38,7 +38,8 @@ export class SearchComponent {
   rows: number = 8;
   totalRecords: number = 24;
   items: Query | undefined;
-  models: Array<string> = ['LLama', 'Mistral', 'Gemini', 'Grok'];
+  pages: Page[] = [];
+  models: Array<string> = ['Images', 'Mistral', 'Gemini', 'Grok'];
 
   constructor(
     private route: ActivatedRoute,
@@ -63,11 +64,30 @@ export class SearchComponent {
   async loadItem(param: string) {
     this.items = await this.query.initialSearch(param, this.first);
     this.totalRecords = this.items.query.searchinfo.totalhits;
+    if (this.totalRecords) {
+      this.pages = this.sortItems(this.items);
+    }
+    console.log(this.items);
+    console.log(this.pages)
+    console.log(this.totalRecords);
   }
 
   async search(event?: any, eventValue?: string) {
+    event?.preventDefault();
     this.router.navigate(['/search'], {
       queryParams: { q: event.target.value ? event.target.value : eventValue },
     });
+  }
+
+  getKeys(item: any) {
+    return Object.keys(item);
+  }
+
+  sortItems(item: Query): Page[] {
+    const entries = Object.entries(item.query.pages);
+    entries.sort((a, b) => {
+      return a[1].index - b[1].index;
+    });
+    return entries.map((entry) => entry[1]);
   }
 }

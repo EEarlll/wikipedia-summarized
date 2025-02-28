@@ -16,7 +16,7 @@ input {
   width: 50%;
 }
 
-ul {
+.category-list ul {
   display: flex;
   gap: 2rem;
   margin-top: 34px;
