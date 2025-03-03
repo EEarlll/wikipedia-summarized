@@ -7,11 +7,10 @@ import { ArticleService } from '../article.service';
 import { FirebaseService } from '../firebase.service';
 import { SkeletonModule } from 'primeng/skeleton';
 import { LinkifyArticlePipe } from '../linkify-article.pipe';
-import { Image } from 'primeng/image';
 
 @Component({
   selector: 'app-article',
-  imports: [CommonModule, SkeletonModule, LinkifyArticlePipe, Image],
+  imports: [CommonModule, SkeletonModule, LinkifyArticlePipe],
   templateUrl: './article.component.html',
   styleUrl: './article.component.css',
 })
