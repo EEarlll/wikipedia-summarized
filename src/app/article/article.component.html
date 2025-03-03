@@ -14,16 +14,17 @@
     </div>
 
     <div class="article-content">
-      <img
+      <p-image
         [src]="info?.image"
-        alt=""
-        srcset=""
-        style="
-          float: right;
-          margin-left: 1em;
-          max-width: 400px;
-          max-height: 400px;
-        "
+        alt="Article image"
+        [style]="{
+          float: 'right',
+          'margin-left': '1em',
+          object: 'fit'
+        }"
+        width="400"
+        height="400"
+        [preview]="true"
       />
       <p [innerHTML]="article | linkifyArticle : info?.links"></p>
     </div>

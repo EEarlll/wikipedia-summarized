@@ -4,6 +4,15 @@ div {
   height: 100%;
 }
 
+.color-switcher {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2rem;
+  padding: 0.3rem;
+  cursor: pointer;
+}
+
 footer {
   display: flex;
   justify-content: center;
@@ -13,5 +22,8 @@ footer {
 @media (max-width: 480px) {
   footer {
     display: none;
+  }
+  .color-switch {
+    margin: 1rem;
   }
 }

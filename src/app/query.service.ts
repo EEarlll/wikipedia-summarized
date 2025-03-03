@@ -9,6 +9,11 @@ export class QueryService {
   baseUrl = 'https://en.wikipedia.org/w/api.php';
 
   async initialSearch(query: string, offset: number = 0): Promise<Query> {
+    const cacheKey = `search-${query}-${offset}`;
+    const cachedData = sessionStorage.getItem(cacheKey);
+    if (cachedData) {
+      return JSON.parse(cachedData);
+    }
     const endPoint =
       `${this.baseUrl}?action=query&format=json&generator=search` +
       `&prop=pageimages|description|extracts|info` +
@@ -29,6 +34,7 @@ export class QueryService {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
+      sessionStorage.setItem(cacheKey, JSON.stringify(data));
       return data;
     } catch (error) {
       console.error(
@@ -40,7 +46,17 @@ export class QueryService {
   }
 
   async articleSearch(title: string): Promise<ArticleInterface> {
-    const endPoint = `${this.baseUrl}?action=query&prop=extracts|pageimages|images|links&format=json&exlimit=1&explaintext=&piprop=original&pllimit=500&origin=*`;
+    const cacheKey = `article-${title}`;
+    const cachedData = sessionStorage.getItem(cacheKey);
+    if (cachedData) {
+      return JSON.parse(cachedData);
+    }
+
+    const endPoint =
+      `${this.baseUrl}?action=query` +
+      `&prop=extracts|pageimages|images|links` +
+      `&format=json&exlimit=1&explaintext=&piprop=original` +
+      `&pllimit=500&origin=*`;
     const userUrl = `${endPoint}&titles=${title}`;
 
     try {
@@ -71,6 +87,7 @@ export class QueryService {
         links: page.links?.map((link: any) => link.title),
       };
       console.log(article);
+      sessionStorage.setItem(cacheKey, JSON.stringify(article));
       return article;
     } catch (error) {
       console.error(
