@@ -14,18 +14,12 @@
     </div>
 
     <div class="article-content">
-      <p-image
+      <img
         [src]="info?.image"
         alt="Article image"
-        [style]="{
-          float: 'right',
-          'margin-left': '1em',
-          object: 'fit'
-        }"
-        width="400"
-        height="400"
-        [preview]="true"
+        class="articleImage"
       />
+
       <p [innerHTML]="article | linkifyArticle : info?.links"></p>
     </div>
   </ng-container>

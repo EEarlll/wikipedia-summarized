@@ -19,9 +19,16 @@ p {
   white-space: pre-wrap;
 }
 
-.article-header__back{
+.article-header__back {
   display: flex;
   justify-content: space-between;
+}
+
+.articleImage {
+  float: right;
+  margin-left: 1em;
+  max-width: 400px;
+  max-height: 400px;
 }
 
 /* Responsive adjustments */
@@ -40,7 +47,7 @@ p {
   p {
     font-size: 0.8rem;
   }
-  img{
+  img {
     width: 100%;
   }
 }

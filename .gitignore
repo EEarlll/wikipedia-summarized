@@ -3,6 +3,9 @@
 environments
 .firebaserc
 public
+.firebase
+.vscode
+firebase.json
 
 # Compiled output
 /browser
