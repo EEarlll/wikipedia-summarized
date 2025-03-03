@@ -2,8 +2,10 @@
 
 environments
 .firebaserc
+public
 
 # Compiled output
+/browser
 /dist
 /tmp
 /out-tsc
