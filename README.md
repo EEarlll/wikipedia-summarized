@@ -20,8 +20,14 @@ Wikipedia summarized is a Angular application designed to provide a seamless use
 2. Navigate to the project directory:
     ```bash
     cd wikipedia-summarized
+    ```    
+3. Generate environment files and add your Firebase and Gemini API keys:
+    ```bash
+    ng g environment
     ```
-3. Install dependencies:
+    Update the generated environment files with your Firebase and Gemini API keys.
+    
+4. Install dependencies:
     ```bash
     npm install
     ```
