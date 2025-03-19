@@ -23,6 +23,7 @@ import { IconField } from 'primeng/iconfield';
 })
 export class HomeComponent {
   title = 'Cortex';
+  private random_word_file = "assets/words_dictionary.json";
 
   constructor(private router: Router) {}
 
@@ -30,10 +31,11 @@ export class HomeComponent {
     event?.preventDefault();
     let randomWord;
     if (lucky) {
-      randomWord = await fetch(
-        'https://random-word-api.herokuapp.com/word?number=1'
-      );
-      randomWord = (await randomWord.json())[0];
+      const response = await fetch(this.random_word_file);
+      const words = await response.json();
+      const keys = Object.keys(words);
+      let randomIndex = Math.floor(Math.random() * keys.length);
+      randomWord = keys[randomIndex]; 
     }
     const parameter = event.target.value ? event.target.value : eventValue;
     this.router.navigate(['/search'], {
