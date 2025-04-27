@@ -5,7 +5,7 @@ import { environment } from '../environments/environment.development';
   providedIn: 'root',
 })
 export class ArticleService {
-  geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite`;
+  geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-04-17`;
   instruction =
     'Your task is to generate a structured summary of a parsed Wikipedia article without altering the original wording of key phrases and sentences. The summary must be exactly four paragraphs, with each paragraph covering a distinct key point of the article. Each paragraph should be limited to 3–5 sentences, ensuring readability while preserving the essential meaning and structure of the original text. Do not rephrase or modify critical terms, as the output will be compared against a list of links.';
 
@@ -22,6 +22,11 @@ export class ArticleService {
           system_instruction: {
             parts: {
               text: this.instruction,
+            },
+          },
+          generationConfig: {
+            thinkingConfig: {
+              thinkingBudget: 0,
             },
           },
           contents: {
